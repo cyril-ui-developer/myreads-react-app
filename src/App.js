@@ -4,6 +4,7 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
+    books:[],
     /**
      * TODO: Instead of using this state variable to keep track of which page
      * we're on, use the URL in the browser's address bar. This will ensure that
@@ -12,10 +13,22 @@ class BooksApp extends React.Component {
      */
     showSearchPage: true
   }
+ 
+   componentDidMount(){
+     BooksAPI.getAll().then((data) => {
+        this.setState({
+         books:data 
+        })
+     })
+
+ 
+ 
+ }
 
   render() {
     return (
       <div className="app">
+        { JSON.stringify(this.state.books) }
         {this.state.showSearchPage ? (
           <div className="search-books">
             <div className="search-books-bar">
