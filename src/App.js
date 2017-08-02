@@ -2,6 +2,8 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import MyReadsListBooks from './ListBooksMain';
+import { Route } from 'react-router-dom';
+import BooksSearch from './BooksSearch';
 
 class BooksApp extends React.Component {
   state = {
@@ -12,7 +14,7 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: true
+    searchResult:[]
   }
  
    componentDidMount(){
@@ -21,10 +23,17 @@ class BooksApp extends React.Component {
          books:data 
         })
      })
+}
 
- 
- 
- }
+ searchBooks(book) {
+   console.log(book)
+    BooksAPI.search(book,20).then(data => {
+       this.setState(state => ({
+         searchResult: data
+       }))
+     })
+        console.log(this.state.searchResult)
+   }
 
   render() {
     return (
@@ -33,10 +42,18 @@ class BooksApp extends React.Component {
           <div className="list-books-title">
             <h1>MyReads</h1>
           </div>
-          <MyReadsListBooks listBooks={this.state.books} />
-          <div className="open-search">
-            <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-          </div>
+          <Route exact path="/" render={() =>(
+             <MyReadsListBooks listBooks={this.state.books} />
+          )} />
+           <Route path='/search' render={({ history }) => (
+           <BooksSearch 
+           onSearchBooks={(book) => {
+               this.searchBooks(book)
+              // history.push('/')
+             }}
+             listBooksSearch={this.state.searchResult}
+             />
+           )}/>
         </div>
       </div>
     )
