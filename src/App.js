@@ -29,7 +29,7 @@ class BooksApp extends React.Component {
    console.log(book)
     BooksAPI.search(book,20).then(data => {
        this.setState(state => ({
-         searchResult: data
+         books: data
        }))
      })
         console.log(this.state.searchResult)
@@ -51,7 +51,7 @@ class BooksApp extends React.Component {
                this.searchBooks(book)
               // history.push('/')
              }}
-             listBooksSearch={this.state.searchResult}
+             listBooksSearch={this.state.books}
              />
            )}/>
         </div>
