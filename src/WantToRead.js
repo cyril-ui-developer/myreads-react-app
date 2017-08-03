@@ -10,8 +10,8 @@ console.log(this.props.wantToReadBooks)
             <div className="bookshelf">
               <h2 className="bookshelf-title">Want to Read</h2>
               <div className="bookshelf-books">
-                <ol className="books-grid" > {this.props.wantToReadBooks.map((book, i) => (
-                  <li key={book.id}>
+                <ol className="books-grid" > {this.props.wantToReadBooks.map((book, index) => (
+                  <li key={index}>
                       <div className="book">
                         <div className="book-top">
                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
@@ -26,8 +26,8 @@ console.log(this.props.wantToReadBooks)
                           </div>
                         </div>
                         <div className="book-title">{book.title}</div>
-                        {book.authors.map((author) => (
-                          <div className="book-authors">{author}</div>
+                        {book.authors.map((author, i) => (
+                          <div key={i} className="book-authors">{author}</div>
                         ))}
                       </div>
                   </li>

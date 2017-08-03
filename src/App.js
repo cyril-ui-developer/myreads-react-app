@@ -8,6 +8,7 @@ import BooksSearch from './BooksSearch';
 class BooksApp extends React.Component {
   state = {
     books:[],
+    searchBooks:[],
     /**
      * TODO: Instead of using this state variable to keep track of which page
      * we're on, use the URL in the browser's address bar. This will ensure that
@@ -17,22 +18,35 @@ class BooksApp extends React.Component {
     searchResult:[]
   }
  
-   componentDidMount(){
+  componentDidMount(){
      BooksAPI.getAll().then((data) => {
         this.setState({
          books:data 
         })
      })
-}
+  }
 
  searchBooks(book) {
    console.log(book)
     BooksAPI.search(book,20).then(data => {
        this.setState(state => ({
-         books: data
+         searchBooks: data
        }))
      })
         console.log(this.state.searchResult)
+   }
+
+ createBook(book, shelf) {
+   let curBook = book;
+   curBook.shelf = shelf;
+    BooksAPI.update(book, shelf).then(b => {
+       this.setState(state => ({
+         
+         books: state.books.concat([ curBook ])
+       }))
+            console.log(curBook)
+                 console.log(shelf)
+     })
    }
 
   render() {
@@ -51,7 +65,13 @@ class BooksApp extends React.Component {
                this.searchBooks(book)
               // history.push('/')
              }}
-             listBooksSearch={this.state.books}
+             listBooksSearch={this.state.searchBooks}
+
+             onBookShelf={(book, shelf) => {
+               this.createBook(book, shelf)
+               history.push('/')
+               console.log(book)
+             }}
              />
            )}/>
         </div>

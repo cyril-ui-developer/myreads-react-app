@@ -15,7 +15,7 @@ class MyReadsListBooks extends Component {
     return (
         <div className="list-books-content">
           <div>
-            <CurrentlyReading currentReadingBooks={ currentReadingBooks }/>
+            <CurrentlyReading currentReadingBooks={ currentReadingBooks } />
             <WantToRead wantToReadBooks={ wantToReadBooks }/>
             <Read readBooks={ readBooks }/>
           </div>

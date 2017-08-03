@@ -8,8 +8,8 @@ class Read extends Component {
             <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
               <div className="bookshelf-books">
-                <ol className="books-grid" > {this.props.readBooks.map((book) => (
-                  <li key={book.id}>
+                <ol className="books-grid" > {this.props.readBooks.map((book, i) => (
+                  <li key={i}>
                       <div className="book">
                         <div className="book-top">
                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
@@ -24,8 +24,8 @@ class Read extends Component {
                           </div>
                         </div>
                         <div className="book-title">{book.title}</div>
-                        {book.authors.map((author) => (
-                          <div className="book-authors">{author}</div>
+                        {book.authors.map((author, i) => (
+                          <div  key={i} className="book-authors">{author}</div>
                         ))}
                       </div>
                   </li>
