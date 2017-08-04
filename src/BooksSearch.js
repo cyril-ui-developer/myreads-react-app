@@ -47,7 +47,7 @@ handleSubmit = (e) => {
                this.props.onBookShelfUpdate(book, shelf)
                console.log(shelf)
                   }}/>
-{this.bookShelf}
+
              
            </div>    
     )

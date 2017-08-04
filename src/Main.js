@@ -14,15 +14,21 @@ class Main extends Component {
           <div>
              <div className="bookshelf">
               <h2 className="bookshelf-title">Currently Reading</h2>
-                  <BookShelf booksInShelf={ currentReadingBooks } />
+               <BookShelf  booksInShelf={ currentReadingBooks} onBookShelf={(book, shelf) => {
+                     this.props.onBookShelfUpdate(book, shelf)
+                  }} />
               </div>
                <div className="bookshelf">
                <h2 className="bookshelf-title">Want to Read</h2>
-              <BookShelf  booksInShelf={ wantToReadBooks } />
+              <BookShelf  booksInShelf={ wantToReadBooks } onBookShelf={(book, shelf) => {
+                     this.props.onBookShelfUpdate(book, shelf)
+                  }}/>
               </div>
              <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
-                <BookShelf  booksInShelf={ readBooks } />
+                <BookShelf  booksInShelf={ readBooks } onBookShelf={(book, shelf) => {
+                     this.props.onBookShelfUpdate(book, shelf)
+                  }}/>
               </div>
           </div>
            <Link to='/search' className="open-search">Add a book</Link>

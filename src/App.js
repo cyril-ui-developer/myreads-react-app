@@ -50,7 +50,11 @@ class BooksApp extends React.Component {
             <h1>MyReads</h1>
           </div>
           <Route exact path="/" render={() =>(
-             <Main listBooks={this.state.books} />
+             <Main listBooks={this.state.books}
+             onBookShelfUpdate={(book, shelf) => {
+               this.updateBook(book, shelf)
+             }}
+              />
           )} />
            <Route path='/search' render={({ history }) => (
            <BooksSearch 
