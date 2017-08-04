@@ -1,37 +1,39 @@
 import React, { Component } from 'react';
+import serializeForm from 'form-serialize'
 
 
+class BookShelf  extends Component {
 
-class CurrentlyReading extends Component {
-
-handleSubmit2 = (e) => {
+ 
+handleSelectChange = (book, e) => {
     e.preventDefault()
-    //const values = serializeForm(e.target, { hash: true })
-    const currentBook = this.bookRef;
-    console.log(this.bookRef)
-   // if (this.props.onBookShelf){
-    this.props.onBookShelf(currentBook, currentBook.shelf )
-   // }
+    const value = e.target.value;
+
+    console.log(value);
+     console.log(book);
+   //if (this.props.onBookShelf){
+   this.props.onBookShelf(book, value )
+  // }
 }
   render() {
 
     return (
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
               <div className="bookshelf-books">
-                <ol className="books-grid" > {this.props.currentReadingBooks.map((book, i) => (
+                <ol className="books-grid" > {this.props.booksInShelf.map((book, i) => (
                   <li key={i}>
                       <div className="book">
                         <div className="book-top">
                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
                           <div className="book-shelf-changer">
-                            <select value={book.shelf} ref={(select) => { this.bookRef = book; }} onChange={this.handleSubmit2}>
+                     
+                            <select value={book.shelf} onChange={this.handleSelectChange.bind(this, book)}>
                               <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
+                              <option name="currentlyReading" value="currentlyReading">Currently Reading</option>
+                              <option name="wantToRead" value="wantToRead">Want to Read</option>
+                              <option name="read" value="read">Read</option>
+                              <option name="none" value="none">None</option>
                             </select>
+                           
                           </div>
                         </div>
                         <div className="book-title">{book.title}</div>
@@ -43,9 +45,9 @@ handleSubmit2 = (e) => {
                 ))}
                 </ol>
               </div>
-            </div>      
+             
     )
   }
 }
 
-export default CurrentlyReading
+export default BookShelf 

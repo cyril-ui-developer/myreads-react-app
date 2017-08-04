@@ -1,7 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import MyReadsListBooks from './ListBooksMain';
+import Main from './Main';
 import { Route } from 'react-router-dom';
 import BooksSearch from './BooksSearch';
 
@@ -27,25 +27,18 @@ class BooksApp extends React.Component {
   }
 
  searchBooks(book) {
-   console.log(book)
     BooksAPI.search(book,20).then(data => {
        this.setState(state => ({
          searchBooks: data
        }))
      })
-        console.log(this.state.searchResult)
    }
 
- createBook(book, shelf) {
-   let curBook = book;
-   curBook.shelf = shelf;
+ updateBook(book, shelf) {
     BooksAPI.update(book, shelf).then(b => {
-       this.setState(state => ({
-         
-         books: state.books.concat([ curBook ])
+       this.setState(state => ({     
+         books: state.books.concat([ book])
        }))
-            console.log(curBook)
-                 console.log(shelf)
      })
    }
 
@@ -57,20 +50,17 @@ class BooksApp extends React.Component {
             <h1>MyReads</h1>
           </div>
           <Route exact path="/" render={() =>(
-             <MyReadsListBooks listBooks={this.state.books} />
+             <Main listBooks={this.state.books} />
           )} />
            <Route path='/search' render={({ history }) => (
            <BooksSearch 
-           onSearchBooks={(book) => {
+             onSearchBooks={(book) => {
                this.searchBooks(book)
-              // history.push('/')
              }}
              listBooksSearch={this.state.searchBooks}
 
-             onBookShelf={(book, shelf) => {
-               this.createBook(book, shelf)
-               history.push('/')
-               console.log(book)
+             onBookShelfUpdate={(book, shelf) => {
+               this.updateBook(book, shelf)
              }}
              />
            )}/>
