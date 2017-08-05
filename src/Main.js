@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import BookShelf  from './BookShelf ';
 import { Link } from 'react-router-dom';
 import './App.css';
+import PropTypes from 'prop-types'
 
 class Main extends Component {
+
+   static propTypes = {
+    listBooks: PropTypes.array.isRequired,
+    onBookShelfUpdate: PropTypes.func.isRequired
+   }
+
   render() {
     let currentReadingBooks = this.props.listBooks.filter((book) => book.shelf === 'currentlyReading');
     let wantToReadBooks = this.props.listBooks.filter((book) => book.shelf === 'wantToRead');

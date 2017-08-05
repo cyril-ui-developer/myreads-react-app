@@ -5,7 +5,9 @@ import Main from './Main';
 import { Route } from 'react-router-dom';
 import BooksSearch from './BooksSearch';
 
+
 class BooksApp extends React.Component {
+
   
   state = {
     books:[],
@@ -36,7 +38,6 @@ class BooksApp extends React.Component {
          searchBooks: data
        }))
      })
-     console.log(this.state.searchBooks)
    }
 
  updateBook(book, shelf) {
@@ -57,9 +58,9 @@ class BooksApp extends React.Component {
           </div>
           <Route exact path="/" render={() =>(
              <Main listBooks={this.state.books}
-             onBookShelfUpdate={(book, shelf) => {
+               onBookShelfUpdate={(book, shelf) => {
                this.updateBook(book, shelf)
-             }}
+               }}
               />
            )} />
            <Route path='/search' render={({ history }) => (

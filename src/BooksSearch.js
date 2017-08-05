@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import serializeForm from 'form-serialize'
 import BookShelf  from './BookShelf ';
-
+import PropTypes from 'prop-types'
 
 class BooksSearch extends Component {
-
+  static propTypes = {
+    listBooksSearch: PropTypes.array.isRequired,
+    onSearchBooks: PropTypes.func.isRequired
+   }
 
 handleSubmit = (e) => {
     e.preventDefault()

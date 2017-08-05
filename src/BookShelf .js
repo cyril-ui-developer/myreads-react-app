@@ -20,16 +20,14 @@ render() {
                       <div className="book">
                         <div className="book-top">
                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-                          <div className="book-shelf-changer">
-                     
+                          <div className="book-shelf-changer">             
                             <select value={book.shelf} onChange={this.handleSelectChange.bind(this, book)}>
                               <option value="none" disabled>Move to...</option>
                               <option name="currentlyReading" value="currentlyReading">Currently Reading</option>
                               <option name="wantToRead" value="wantToRead">Want to Read</option>
                               <option name="read" value="read">Read</option>
                               <option name="none" value="none">None</option>
-                            </select>
-                           
+                            </select>      
                           </div>
                         </div>
                         <div className="book-title">{book.title}</div>
@@ -41,7 +39,7 @@ render() {
                 ))}
                 </ol>
               </div>
-             
+       
     )
   }
 }
