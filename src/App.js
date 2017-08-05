@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import BooksSearch from './BooksSearch';
 
 class BooksApp extends React.Component {
+  
   state = {
     books:[],
     searchBooks:[],
@@ -18,12 +19,15 @@ class BooksApp extends React.Component {
     searchResult:[]
   }
  
-  componentDidMount(){
-     BooksAPI.getAll().then((data) => {
+  getBooks(){
+    BooksAPI.getAll().then((data) => {
         this.setState({
          books:data 
         })
      })
+  }
+  componentDidMount(){
+     this.getBooks();
   }
 
  searchBooks(book) {
@@ -32,6 +36,7 @@ class BooksApp extends React.Component {
          searchBooks: data
        }))
      })
+     console.log(this.state.searchBooks)
    }
 
  updateBook(book, shelf) {
@@ -40,6 +45,7 @@ class BooksApp extends React.Component {
          books: state.books.concat([ book])
        }))
      })
+     
    }
 
   render() {
@@ -55,7 +61,7 @@ class BooksApp extends React.Component {
                this.updateBook(book, shelf)
              }}
               />
-          )} />
+           )} />
            <Route path='/search' render={({ history }) => (
            <BooksSearch 
              onSearchBooks={(book) => {

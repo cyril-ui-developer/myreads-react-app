@@ -20,10 +20,6 @@ handleSubmit = (e) => {
 
 
   render() {
-   //console.log(this.props.listBooksSearch)
- 
-   let bookShelf
-     console.log(this.bookShelf)
    let listSearchBooks =[];
    listSearchBooks = this.props.listBooksSearch;
 

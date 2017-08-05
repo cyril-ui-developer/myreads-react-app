@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
-import serializeForm from 'form-serialize'
 
 
 class BookShelf  extends Component {
 
- 
 handleSelectChange = (book, e) => {
     e.preventDefault()
     const value = e.target.value;
-
-    console.log(value);
-     console.log(book);
-   //if (this.props.onBookShelf){
-   this.props.onBookShelf(book, value )
-  // }
+    
+   if (this.props.onBookShelf){
+       this.props.onBookShelf(book, value)
+    }
 }
-  render() {
+render() {
 
     return (
               <div className="bookshelf-books">
