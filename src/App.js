@@ -26,7 +26,9 @@ class BooksApp extends React.Component {
         this.setState({
          books:data 
         })
-     })
+     }).catch(function(e) {
+        console.log(e); 
+    });
   }
   componentDidMount(){
      this.getBooks();
@@ -36,8 +38,10 @@ class BooksApp extends React.Component {
     BooksAPI.search(book,20).then(data => {
        this.setState(state => ({
          searchBooks: data
-       }))
-     })
+       }))  
+     }).catch(function(e) {
+        console.log(e); 
+    })
    }
 
  updateBook(book, shelf) {
@@ -45,8 +49,10 @@ class BooksApp extends React.Component {
        this.setState(state => ({     
          books: state.books.concat([ book])
        }))
-     })
-     
+         this.getBooks();
+     }).catch(function(e) {
+        console.log(e); 
+    });
    }
 
   render() {
@@ -69,7 +75,6 @@ class BooksApp extends React.Component {
                this.searchBooks(book)
              }}
              listBooksSearch={this.state.searchBooks}
-
              onBookShelfUpdate={(book, shelf) => {
                this.updateBook(book, shelf)
              }}

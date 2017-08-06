@@ -42,7 +42,7 @@ handleSubmit = (e) => {
               <ol className="books-grid"></ol>
             </div>
               <BookShelf  booksInShelf={ listSearchBooks } onBookShelf={(book, shelf) => {
-                console.log(book) 
+                console.log(listSearchBooks) 
                this.props.onBookShelfUpdate(book, shelf)
                console.log(shelf)
                   }}/>
