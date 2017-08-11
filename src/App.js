@@ -35,19 +35,28 @@ class BooksApp extends React.Component {
   }
 
  searchBooks(book) {
+     console.log("this.state.searchBooks") 
+     
     BooksAPI.search(book,20).then(data => {
        this.setState(state => ({
          searchBooks: data
-       }))  
-     }).catch(function(e) {
+       })
+       
+       ) 
+       console.log("this.state.searchBooks") 
+     }
+     
+     ).catch(function(e) {
         console.log(e); 
     })
+    
    }
 
  updateBook(book, shelf) {
     BooksAPI.update(book, shelf).then(b => {
        this.setState(state => ({     
-         books: state.books.concat([ book])
+         //books: state.books.concat([ book])
+         books: state.books.filter(b => b.id !== book.id).concat([book])
        }))
          this.getBooks();
      }).catch(function(e) {
@@ -75,6 +84,7 @@ class BooksApp extends React.Component {
                this.searchBooks(book)
              }}
              listBooksSearch={this.state.searchBooks}
+             listBooks={this.state.books}
              onBookShelfUpdate={(book, shelf) => {
                this.updateBook(book, shelf)
              }}

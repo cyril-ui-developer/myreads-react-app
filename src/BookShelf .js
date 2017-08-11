@@ -8,11 +8,11 @@ handleSelectChange = (book, e) => {
     const value = e.target.value;
     
    if (this.props.onBookShelf){
-       this.props.onBookShelf(book, value)
+       this.props.onBookShelf(book, value);
     }
 }
 render() {
-
+console.log(this.props.booksInShelf)
     return (
               <div className="bookshelf-books">
                 <ol className="books-grid" > {this.props.booksInShelf.map((book, i) => (
