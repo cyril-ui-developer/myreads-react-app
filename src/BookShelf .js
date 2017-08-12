@@ -11,11 +11,11 @@ handleSelectChange = (book, e) => {
        this.props.onBookShelf(book, value);
     }
 }
-render() {
-console.log(this.props.booksInShelf)
-    return (
-              <div className="bookshelf-books">
-                <ol className="books-grid" > {this.props.booksInShelf.map((book, i) => (
+
+renderBookShelf(){
+  if(this.props.booksInShelf.length > 0){
+    return(
+       <ol className="books-grid" > {this.props.booksInShelf.map((book, i) => (
                   <li key={i}>
                       <div className="book">
                         <div className="book-top">
@@ -31,13 +31,24 @@ console.log(this.props.booksInShelf)
                           </div>
                         </div>
                         <div className="book-title">{book.title}</div>
-                        {book.authors.map((author, i) => (
+                        { Array.isArray(book.authors) ?
+                        book.authors.map((author, i) => (
                           <div key={i} className="book-authors">{author}</div>
-                        ))}
+                        ))
+                        :
+                        false
+                        }
                       </div>
                   </li>
                 ))}
                 </ol>
+    )
+  }
+}
+render() {
+    return (
+              <div className="bookshelf-books">
+               {this.renderBookShelf()}
               </div>
              
     )

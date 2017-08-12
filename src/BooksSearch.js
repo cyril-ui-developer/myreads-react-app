@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
-import serializeForm from 'form-serialize'
 import BookShelf  from './BookShelf ';
 import PropTypes from 'prop-types'
 
@@ -16,30 +15,29 @@ class BooksSearch extends Component {
   }
 
 handleChange(e) {
-   e.preventDefault()
-  this.setState({search: e.target.value})
-  console.log(this.state.search)
+  e.preventDefault()
+  this.setState({search: e.target.value});
   if (this.props.onSearchBooks && this.state.search !== ""){
-    this.props.onSearchBooks(this.state.search)
+    this.props.onSearchBooks(this.state.search);
   }
 }
 
   render() {
-   let listSearchBooks =[];
-   listSearchBooks = this.props.listBooksSearch;
-   let listBooks = this.props.listBooks;
+
     let verifiedBooks =[];
-    verifiedBooks = listSearchBooks.map(book => {
-     listBooks.forEach(bookOnShelf => {
+    if(this.props.listBooksSearch.length > 0){
+      verifiedBooks = this.props.listBooksSearch.map(book => {
+      this.props.listBooks.forEach(bookOnShelf => {
       // check wether book is already on shelf
       if (book.id === bookOnShelf.id) {
         // if yes get the shelf data from BooksOnShelf
-        book.shelf = bookOnShelf.shelf;
-        
+        book.shelf = bookOnShelf.shelf;        
       }
-     });
+      });
        return book;
-    });
+      });
+    }
+    
 
     return (    
          <div className="search-books">

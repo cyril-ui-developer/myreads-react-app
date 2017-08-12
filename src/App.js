@@ -34,16 +34,12 @@ class BooksApp extends React.Component {
      this.getBooks();
   }
 
- searchBooks(book) {
-     console.log("this.state.searchBooks") 
-     
+ searchBooks(book) {    
     BooksAPI.search(book,20).then(data => {
        this.setState(state => ({
          searchBooks: data
        })
-       
        ) 
-       console.log("this.state.searchBooks") 
      }
      
      ).catch(function(e) {
@@ -55,12 +51,10 @@ class BooksApp extends React.Component {
  updateBook(book, shelf) {
     BooksAPI.update(book, shelf).then(b => {
        this.setState(state => ({     
-         //books: state.books.concat([ book])
          books: state.books.filter(b => b.id !== book.id).concat([book])
        }))
          this.getBooks();
      }).catch(function(e) {
-        console.log(e); 
     });
    }
 
